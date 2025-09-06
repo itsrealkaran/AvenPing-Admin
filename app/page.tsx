@@ -41,114 +41,129 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-cyan-50"></div>
-      
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-        }}></div>
-      </div>
+      {/* So this is the bg I have added, ig you can change this with themes */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#DFFFF9] via-white to-[#FDCEFF]" />
 
-      {/* Login Card */}
-      <div className="relative z-10 w-full max-w-md mx-4">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
-          {/* Logo and Title */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl mb-4">
-              <span className="text-2xl font-bold text-white">A</span>
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-            <p className="text-gray-600">Sign in to your AvenPing Admin account</p>
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
+
+      <div className="relative z-10 w-full max-w-lg mx-auto px-4 sm:px-6 py-4 sm:py-6 flex flex-col items-center justify-center space-y-1">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl border-4 border-black/10 p-4 sm:p-8 w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
+          <div className="text-center mb-4 sm:mb-8">
+            <h1 className="text-base sm:text-xl md:text-2xl font-semibold text-gray-900 mb-1 sm:mb-2">
+              Sign in to your account
+            </h1>
           </div>
 
-          {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
+              <label
+                htmlFor="email"
+                className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2"
+              >
+                Email or Username
               </label>
               <input
+                type="text"
                 id="email"
-                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                className="w-full px-2 sm:px-4 py-2 sm:py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#43A2C9] focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-400 text-xs sm:text-base"
                 placeholder="Enter your email"
+                required
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="Password"
+                className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2"
+              >
                 Password
               </label>
               <div className="relative">
                 <input
-                  id="password"
                   type={showPassword ? "text" : "password"}
+                  id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="w-full px-2 sm:px-4 py-2 sm:py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#43A2C9] focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-400 pr-10 sm:pr-12 text-xs sm:text-base"
                   placeholder="Enter your password"
+                  required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                  className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  {showPassword ? (
+                    <EyeOff size={16} className="sm:w-5 sm:h-5" />
+                  ) : (
+                    <Eye size={16} className="sm:w-5 sm:h-5" />
+                  )}
                 </button>
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <span className="ml-2 text-sm text-gray-600">Remember me</span>
-              </label>
+            <div className="text-left">
               <Link
-                href="/forgot-password"
-                className="text-sm text-blue-600 hover:text-blue-700 transition-colors"
+              href="/forgot-password"
+                className="text-xs sm:text-sm text-[#43A2C9] hover:text-cyan-600 transition-colors"
               >
-                Forgot password?
+                Forgot Password
               </Link>
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-3 px-4 rounded-lg font-medium hover:from-blue-700 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#43A2C9] hover:bg-cyan-600 text-white font-medium py-2 sm:py-3 px-3 sm:px-4 rounded-lg transition-colors duration-200 focus:ring-2 focus:ring-[#43A2C9] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-base"
             >
-              {isLoading ? "Signing in..." : "Sign In"}
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  <span className="text-xs sm:text-sm">Signing in...</span>
+                </div>
+              ) : (
+                "Sign In"
+              )}
             </button>
           </form>
 
-          {/* Footer */}
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-600">
-              Don't have an account?{" "}
+          <div className="mt-4 sm:mt-8 text-center space-y-2 sm:space-y-4">
+            <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+              By proceeding, you agree to our{" "}
+              <Link
+                href="https://avenping.com/terms-of-service"
+                className="text-[#43A2C9] hover:text-cyan-600"
+              >
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="https://avenping.com/privacy-policy"
+                className="text-[#43A2C9] hover:text-cyan-600"
+              >
+                Privacy Policy
+              </Link>
+            </p>
+
+            <p className="text-xs sm:text-sm text-gray-600">
+              {"Don't have an account? "}
               <Link
                 href="/signup"
-                className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                className="text-[#43A2C9] hover:text-cyan-600 font-medium"
               >
-                Contact Administrator
+                Sign up
               </Link>
             </p>
           </div>
         </div>
 
-        {/* Additional Info */}
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500">
-            Secure admin access to AvenPing platform
+        {/* <div className="mt-4 sm:mt-6 text-center">
+          <p className="text-xs text-gray-500">
+            Demo credentials: pushkarkamble23@gmail.com / 12345678
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

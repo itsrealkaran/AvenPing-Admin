@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Sidebar from "./sidebar";
+import Sidebar, { IconName } from "./sidebar";
 
 interface AccountInfoItem {
   name: string;
@@ -11,7 +11,7 @@ interface AccountInfoItem {
 interface SidebarContainerProps {
   brand?: { name: string; logo: string };
   navigationItems: Array<{
-    iconName: string;
+    iconName: IconName;
     label: string;
     href: string;
   }>;

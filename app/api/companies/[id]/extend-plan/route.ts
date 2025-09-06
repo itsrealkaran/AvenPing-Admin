@@ -3,10 +3,10 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const body = await request.json();
     const { newExpiryDate, planType } = body;
 
@@ -51,23 +51,14 @@ export async function POST(
     const currentPlans = user.plans as any[];
     const updatedPlans = [...currentPlans];
 
-    if (planType) {
-      // Add new plan entry
-      updatedPlans.push({
-        planName: planType,
-        period: "yearly",
-        isAddOn: false,
+    // Update existing plan end date
+    const currentPlanIndex = updatedPlans.findIndex((plan: any) => !plan.isAddOn);
+    if (currentPlanIndex !== -1) {
+      updatedPlans[currentPlanIndex] = {
+        ...updatedPlans[currentPlanIndex],
+        planName: planType || (updatedPlans[currentPlanIndex].planName),
         endDate: expiryDate.toISOString().split('T')[0]
-      });
-    } else {
-      // Update existing plan end date
-      const currentPlanIndex = updatedPlans.findIndex((plan: any) => !plan.isAddOn);
-      if (currentPlanIndex !== -1) {
-        updatedPlans[currentPlanIndex] = {
-          ...updatedPlans[currentPlanIndex],
-          endDate: expiryDate.toISOString().split('T')[0]
-        };
-      }
+      };
     }
 
     // Update user in database
@@ -78,11 +69,6 @@ export async function POST(
         updatedAt: new Date(),
       },
     });
-
-    // In a real implementation, you would:
-    // 1. Update subscription in payment provider (Stripe, etc.)
-    // 2. Send notification email to company
-    // 3. Log the action for audit purposes
 
     return NextResponse.json({
       success: true,

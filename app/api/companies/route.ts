@@ -63,14 +63,13 @@ export async function GET(request: NextRequest) {
       const currentPlan = plans?.find((plan: any) => !plan.isAddOn);
       const planName = currentPlan?.planName || 'FREE';
       const endDate = currentPlan?.endDate;
-      const isExpired = endDate ? new Date(endDate) < new Date() : false;
       
       return {
         id: user.id,
         name: user.name,
         email: user.email,
         plan: planName,
-        status: isExpired ? 'EXPIRED' : (user.status === 'ACTIVE' ? 'ACTIVE' : user.status),
+        status: user.status,
         expiresAt: endDate ? new Date(endDate).toISOString() : new Date().toISOString(),
         userCount: 1,
         campaignCount: user.whatsAppAccount?.campaigns?.length || 0,

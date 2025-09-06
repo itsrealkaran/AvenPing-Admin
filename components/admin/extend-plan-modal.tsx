@@ -67,12 +67,12 @@ export const ExtendPlanModal: React.FC<ExtendPlanModalProps> = ({
   ];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
-        <div className="flex items-center justify-between p-6 border-b">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 w-full max-w-md">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div className="flex items-center gap-2">
-            <CreditCard className="h-5 w-5 text-blue-600" />
-            <h2 className="text-lg font-semibold text-gray-900">
+            <CreditCard className="h-5 w-5 text-gray-600" />
+            <h2 className="text-lg font-medium text-gray-900">
               Extend Plan
             </h2>
           </div>
@@ -84,12 +84,12 @@ export const ExtendPlanModal: React.FC<ExtendPlanModalProps> = ({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Company
             </label>
-            <div className="p-3 bg-gray-50 rounded-md">
+            <div className="p-3 bg-gray-50 rounded-lg">
               <p className="font-medium text-gray-900">{company.name}</p>
               <p className="text-sm text-gray-600">{company.email}</p>
             </div>
@@ -99,7 +99,7 @@ export const ExtendPlanModal: React.FC<ExtendPlanModalProps> = ({
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Current Plan
             </label>
-            <div className="p-3 bg-gray-50 rounded-md">
+            <div className="p-3 bg-gray-50 rounded-lg">
               <span className={`font-medium ${planOptions.find(p => p.value === company.plan)?.color}`}>
                 {planOptions.find(p => p.value === company.plan)?.label}
               </span>
@@ -116,7 +116,7 @@ export const ExtendPlanModal: React.FC<ExtendPlanModalProps> = ({
             <select
               value={newPlanType}
               onChange={(e) => setNewPlanType(e.target.value as Company["plan"])}
-              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               {planOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -158,7 +158,6 @@ export const ExtendPlanModal: React.FC<ExtendPlanModalProps> = ({
             <Button
               type="submit"
               disabled={isSubmitting || !newExpiryDate}
-              className="bg-blue-600 hover:bg-blue-700"
             >
               {isSubmitting ? "Extending..." : "Extend Plan"}
             </Button>

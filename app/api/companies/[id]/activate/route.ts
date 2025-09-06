@@ -3,10 +3,10 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // Find user
     const user = await prisma.user.findUnique({
@@ -44,12 +44,6 @@ export async function POST(
         updatedAt: new Date(),
       },
     });
-
-    // In a real implementation, you would:
-    // 1. Resume subscription in payment provider (Stripe, etc.)
-    // 2. Send notification email to company
-    // 3. Log the action for audit purposes
-    // 4. Restore company's access to the platform
 
     return NextResponse.json({
       success: true,

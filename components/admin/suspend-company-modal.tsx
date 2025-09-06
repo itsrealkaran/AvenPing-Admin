@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { X, AlertTriangle, Shield } from "lucide-react";
 import { Company } from "@/context/company-provider";
 
@@ -110,7 +109,7 @@ export const SuspendCompanyModal: React.FC<SuspendCompanyModalProps> = ({
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Custom Reason (if "Other" selected)
+              Custom Reason (if &quot;Other&quot; selected)
             </label>
             <textarea
               value={reason}
