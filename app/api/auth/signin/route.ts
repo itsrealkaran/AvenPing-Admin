@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { SignJWT } from "jose";
 
 // Hardcoded admin credentials
-const ADMIN_EMAIL = "admin@avenping.com";
-const ADMIN_PASSWORD = "admin123";
+const ADMIN_EMAIL = "manpreet@avenping.com";
+const ADMIN_PASSWORD = "Manpreet@123";
 
 export async function POST(request: NextRequest) {
   try {
